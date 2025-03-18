@@ -1,6 +1,6 @@
 # <img src="https://unpkg.com/browserslist-config-baseline@0.1.2/assets/icon.svg" height="25" alt="Baseline Widely Available logo"> browserslist-config-baseline
 
-A [browserslist](https://www.npmjs.com/package/browserslist) config based on [Web Platform Baseline](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility).
+A [browserslist](https://www.npmjs.com/package/browserslist) config based on [WebDX Baseline](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility).
 
 Baseline identifies web platform features that work across browsers. Baseline helps you decide when to use a feature by telling you when it is less likely to cause compatibility problems for your site's visitors.  There are two ways of targeting a Baseline feature set:
 

@@ -1,7 +1,7 @@
 {
   "name": "browserslist-config-baseline",
   "version": "0.2.0",
-  "description": "A browserslist config based on Web Platform Baseline.",
+  "description": "Browserslist config based on WebDX Baseline (as seen on MDN!)",
   "license": "Unlicense",
   "author": {
     "name": "Alexnader Pushkov",
