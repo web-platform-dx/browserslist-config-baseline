@@ -4,7 +4,7 @@ A [browserslist](https://www.npmjs.com/package/browserslist) config based on [We
 
 Baseline identifies web platform features that work across browsers. Baseline helps you decide when to use a feature by telling you when it is less likely to cause compatibility problems for your site's visitors.  There are two ways of targeting a Baseline feature set:
 
-1. [Baseline Widely Available](#baseline-widely-available) - includes all features that were fully supported in Chrome, Edge, Firefox and Safari **30 months before the current data**.
+1. [Baseline Widely Available](#baseline-widely-available) - includes all features that were fully supported in Chrome, Edge, Firefox and Safari **30 months before the current date**.
 2. [Baseline year feature sets](#baseline-year-feature-sets) - includes all features that were fully supported in Chrome, Edge, Firefox and Safari **at the end of a given calendar year**.
 
 You should check your analytics to see which browser versions are prevalent in your userbase before selecting a Baseline target.
