@@ -10,7 +10,10 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://codeberg.org/notpushkin/browserslist-config-baseline.git"
+    "url": "git+https://github.com/web-platform-dx/browserslist-config-baseline.git"
+  },
+  "bugs": {
+    "url": "https://github.com/web-platform-dx/browserslist-config-baseline/issues"
   },
   "scripts": {
     "test": "node test.mjs"
