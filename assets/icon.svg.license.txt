@@ -1,0 +1,5 @@
+icon.svg comes from MDN Web Docs frontend:
+https://github.com/mdn/yari/blob/b68eb39140aeb94aef9063eef868d0fcff5af060/client/src/assets/icons/baseline/high.svg
+
+SPDX-FileCopyrightText: 2023 Mozila Corporation and/or contributors
+SPDX-License-Identifier: MPL-2.0
