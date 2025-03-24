@@ -1,14 +1,14 @@
-/**
- * @link https://github.com/web-platform-dx/web-features/blob/main/docs/baseline.md#core-browser-set
- */
-const coreBrowsers = [
-	"iOS",
-	"Safari",
-	"ChromeAndroid",
-	"Chrome",
-	"Edge",
-	"FirefoxAndroid",
-	"Firefox",
-];
 
-module.exports = [coreBrowsers.join(" > 1, ") + " > 1 and last 2.5 years"];
+module.exports = [
+  "Chrome >= 105",
+  "ChromeAndroid >= 105",
+  "Edge >= 105",
+  "Firefox >= 104",
+  "FirefoxAndroid >= 104",
+  "Safari >= 16",
+  "iOS >= 16"
+]
+
+const compare_versions = require('./scripts/compare-versions-warning');
+
+compare_versions();
