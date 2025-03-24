@@ -4,7 +4,7 @@
   "description": "A browserslist config based on Web Platform Baseline.",
   "license": "Apache-2.0",
   "author": {
-    "name": "Alexnader Pushkov",
+    "name": "Alexander Pushkov",
     "email": "browserslist-config-baseline@ale.sh"
   },
   "main": "index.js",
