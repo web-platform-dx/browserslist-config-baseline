@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "node test.mjs",
-    "update-widely-available": "node ./scripts/update-all-files.js"
+    "update-all-versions": "node ./scripts/update-all-versions.js"
   },
   "keywords": [
     "browserslist",

@@ -1,11 +1,15 @@
-console.log("AAAAAAAH!")
-
 var fs = require('node:fs');
 var process = require('process');
 var previous_core_wa_versions = require('../index');
 var previous_downstream_wa_versions = require('../with-downstream/index')
-var year_file_template = require('./templates/year')
-var wa_file_template = require('./templates/wa')
+
+var year_file_template = `module.exports = {VERSIONS_ARRAY}
+`
+var wa_file_template = year_file_template +
+	`const compare_versions = require('./scripts/compare-versions-warning');
+
+compare_versions();
+`
 
 var browsers = {
 	chrome: "Chrome",
@@ -134,7 +138,7 @@ import('baseline-browser-mapping').then(bbm => {
 				null,
 				2
 			)
-		).replace("./scripts","../scripts"));
+		).replace("./scripts", "../scripts"));
 
 	}
 

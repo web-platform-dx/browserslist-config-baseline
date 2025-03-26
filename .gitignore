@@ -10,6 +10,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# NPM package lock
+package-lock.json
+
 # Caches
 
 .cache

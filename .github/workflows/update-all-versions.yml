@@ -25,10 +25,10 @@ jobs:
           npm ci
           npm i baseline-browser-mapping@latest
 
-      - name: Run update-all-files
-        id: update-all-files
+      - name: Run update-all-versions
+        id: update-all-versions
         run: |
-          npm run update-widely-available
+          npm run update-all-versions
           if [[ -n "$(git diff)" ]]; then
             echo "changes-available=TRUE" >> $GITHUB_OUTPUT
           else
