@@ -1,10 +1,8 @@
 module.exports = function (last_updated) {
 
-	var fs = require('node:fs');
-	var process = require('process');
 	var cv = require('compare-versions');
 
-	if ((process.mainModule.filename).includes("update-all-versions")) {
+	if ((require.main.filename).includes("update-all-versions")) {
 		return
 	}
 
