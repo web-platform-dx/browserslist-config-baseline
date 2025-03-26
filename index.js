@@ -1,4 +1,3 @@
-
 module.exports = [
 	"Chrome >= 105",
 	"ChromeAndroid >= 105",
@@ -11,4 +10,4 @@ module.exports = [
 
 const compare_versions = require('./scripts/compare-versions-warning');
 
-compare_versions();
+compare_versions('2025-03-26');

@@ -12,7 +12,7 @@ module.exports = [
 	"Android >= 105",
 	"and_qq >= 14.2"
 ]
+
 const compare_versions = require('../scripts/compare-versions-warning');
 
-compare_versions();
-
+compare_versions('2025-03-26');

@@ -5,10 +5,13 @@ var previous_downstream_wa_versions = require('../with-downstream/index')
 
 var year_file_template = `module.exports = {VERSIONS_ARRAY}
 `
-var wa_file_template = year_file_template +
-	`const compare_versions = require('./scripts/compare-versions-warning');
 
-compare_versions();
+var run_date = new Date().toISOString().slice(0, 10)
+
+var wa_file_template = year_file_template + `
+const compare_versions = require('./scripts/compare-versions-warning');
+
+compare_versions('${run_date}');
 `
 
 var browsers = {
