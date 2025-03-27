@@ -14,13 +14,12 @@ You should check your analytics to see which browser versions are prevalent in y
 To add `browserslist-config-baseline` to your project, use one of the following commands:
 
 ```sh
-# NPM
+# npm
 npm i browserslist-config-baseline
 # yarn
 yarn add browserslist-config-baseline
-# If using bun, please run: \n' +
+# bun
 bun add browserslist-config-baseline
-```
 
 ## Baseline Widely Available
 
