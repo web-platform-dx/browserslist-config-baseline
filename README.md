@@ -36,7 +36,7 @@ bun add browserslist-config-baseline
 The minimum browser set for Baseline Widely Available changes frequently. Consider updating this module regularly by adding one of these commands to your build scripts:
 
 ```sh
-# NPM
+# npm
 npm i browserslist-config-baseline@latest
 
 # yarn
