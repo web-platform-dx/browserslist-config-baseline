@@ -1,9 +1,2 @@
-module.exports = [
-  "Chrome >= 66",
-  "ChromeAndroid >= 66",
-  "Edge >= 18",
-  "Firefox >= 65",
-  "FirefoxAndroid >= 65",
-  "Safari >= 13",
-  "iOS >= 13"
-]
+const getBaselineVersions = require('../scripts/get-baseline-versions')
+module.exports = getBaselineVersions({ targetYear: 2019 });

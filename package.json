@@ -16,8 +16,7 @@
     "url": "https://github.com/web-platform-dx/browserslist-config-baseline/issues"
   },
   "scripts": {
-    "test": "node test.mjs",
-    "update-all-versions": "node ./scripts/update-all-versions.js"
+    "test": "node test.mjs"
   },
   "keywords": [
     "browserslist",
@@ -30,6 +29,7 @@
     "prettier": "^3.3.2"
   },
   "dependencies": {
+    "@httptoolkit/esm": "^3.3.1",
     "baseline-browser-mapping": "^2.1.0",
     "compare-versions": "^6.1.1"
   }

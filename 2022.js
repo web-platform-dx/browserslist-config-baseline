@@ -1,9 +1,5 @@
-module.exports = [
-  "Chrome >= 108",
-  "ChromeAndroid >= 108",
-  "Edge >= 108",
-  "Firefox >= 108",
-  "FirefoxAndroid >= 108",
-  "Safari >= 16",
-  "iOS >= 16"
-]
+const bbm = require('./scripts/bbm');
+const transform = require('./scripts/transform-bbm-to-browserslist');
+module.exports = transform(bbm.getCompatibleVersions({
+  targetYear: 2022
+}));
