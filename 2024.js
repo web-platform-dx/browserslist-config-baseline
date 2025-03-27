@@ -1,5 +1,2 @@
-const bbm = require('./scripts/bbm');
-const transform = require('./scripts/transform-bbm-to-browserslist');
-module.exports = transform(bbm.getCompatibleVersions({
-  targetYear: 2024
-}));
+const getBaselineVersions = require('./scripts/get-baseline-versions')
+module.exports = getBaselineVersions({ targetYear: 2024 });
