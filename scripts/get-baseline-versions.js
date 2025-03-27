@@ -17,15 +17,9 @@ let transform = function (bbm_versions) {
   };
 
 
-  var browserslist_output = new Array();
-  bbm_versions.forEach(version => {
-    if (Object.keys(browsers).includes(version.browser)) {
-      browserslist_output.push(
-        `${browsers[version.browser]} >= ${version.version}`,
-      );
-    }
-  });
-  return browserslist_output
+  return bbm_versions
+    .filter((version) => Object.keys(browsers).includes(version.browser))
+		.map((version) => `${browsers[version.browser]} >= ${version.version}`);
 
 }
 
