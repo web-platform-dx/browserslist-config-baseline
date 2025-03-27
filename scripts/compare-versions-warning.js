@@ -2,10 +2,6 @@ module.exports = function (last_updated) {
 
 	var cv = require('compare-versions');
 
-	if ((require.main.filename).includes("update-all-versions")) {
-		return
-	}
-
 	var date_one_month_ago = new Date().setMonth(new Date().getMonth() - 1);
 
 	if (new Date(last_updated) < date_one_month_ago) {
