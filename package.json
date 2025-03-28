@@ -16,7 +16,8 @@
     "url": "https://github.com/web-platform-dx/browserslist-config-baseline/issues"
   },
   "scripts": {
-    "test": "node test.mjs"
+    "test": "node test.mjs",
+    "prepare": "node scripts/update-last-updated.js"
   },
   "keywords": [
     "browserslist",

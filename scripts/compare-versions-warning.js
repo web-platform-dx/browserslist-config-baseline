@@ -1,30 +1,33 @@
-module.exports = function (last_updated) {
+module.exports = function () {
 
-  var cv = require('compare-versions');
+  const cv = require('compare-versions');
+  const lastUpdated = require('../lastUpdated.json').lastUpdated;
 
-  var date_one_month_ago = new Date().setMonth(new Date().getMonth() - 1);
+  let dateOneMonthAgo = new Date();
+  dateOneMonthAgo.setMonth(new Date().getMonth() - 1);
 
-  if (new Date(last_updated) < date_one_month_ago) {
-
-    const package_json = require('../package.json');
+  if (new Date(lastUpdated) < dateOneMonthAgo) {
 
     fetch('https://registry.npmjs.org/browserslist-config-baseline')
       .then((response) => response.json())
       .then(data => {
-        var local_version = package_json.version;
-        var remote_version = data['dist-tags'].latest;
-        if (cv.compare(local_version, remote_version, '<')) {
+        const packageJson = require('../package.json')
+        var localVersion = packageJson.version;
+        var remoteVersion = data['dist-tags'].latest;
+        if (cv.compare(localVersion, remoteVersion, '<')) {
           console.warn(
-            'Browserslist: browserslist-config-baseline \n' +
-            'has not been updated in over a month and \n' +
-            'you are using an out of date definition of \n' +
-            'Baseline Widely Available. \n\n' +
+            `You are using browserlist-config-baseline version: \t${localVersion} \n` +
+            `The latest available version is: \t\t\t${remoteVersion} \n` +
+            'You may be using stale data.  Please update browserslist-config-baseline \n' +
+            'to ensure your config is accurate. \n\n' +
             '  # If using npm, please run: \n' +
             '  npm i browserslist-config-baseline@latest \n\n' +
             '  # If using yarn, please run: \n' +
             '  yarn upgrade --latest browserslist-config-baseline \n\n' +
             '  # If using bun, please run: \n' +
-            '  bun update browserslist-config-baseline@latest \n\n'
+            '  bun update browserslist-config-baseline@latest \n\n' +
+            'Consider adding whichever command is appropriate to your ' +
+            'build scripts to avoid seeing this message in future.'
           )
         }
       })
