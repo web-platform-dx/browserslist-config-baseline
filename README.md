@@ -120,5 +120,5 @@ The minimum browser versions of non-core browsers are provided by `baseline-brow
 
 ## See also
 
-- [bl2bl](https://github.com/web-platform-dx/bl2bl) - a command line tool for generating Baseline compliant `browserslist` configurations that are readable in `package.json` and/or `.browserslistrc` files.
 - [WebDX Baseline specification](https://github.com/web-platform-dx/web-features/blob/main/docs/baseline.md)
+- [Web Platform Status dashboard](https://webstatus.dev/) - a dashboard for checking the Baseline status of web platform features.
