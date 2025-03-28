@@ -15,18 +15,18 @@ module.exports = function () {
         const remoteVersion = data["dist-tags"].latest;
         if (cv.compare(localVersion, remoteVersion, "<")) {
           console.warn(
-            `You are using browserlist-config-baseline version: \t${localVersion} \n` +
-              `The latest available version is: \t\t\t${remoteVersion} \n` +
-              "You may be using stale data.  Please update browserslist-config-baseline \n" +
-              "to ensure your config is accurate. \n\n" +
-              "  # If using npm, please run: \n" +
-              "  npm i browserslist-config-baseline@latest \n\n" +
-              "  # If using yarn, please run: \n" +
-              "  yarn upgrade --latest browserslist-config-baseline \n\n" +
-              "  # If using bun, please run: \n" +
-              "  bun update browserslist-config-baseline@latest \n\n" +
-              "Consider adding whichever command is appropriate to your " +
-              "build scripts to avoid seeing this message in future.",
+            `\nYou are using browserlist-config-baseline version: ${localVersion}\n` +
+              `The latest available version is:                   ${remoteVersion}\n` +
+              "You may be using stale data.  Please update browserslist-config-baseline\n" +
+              "to ensure your config is accurate.\n\n" +
+              "  # If using npm, please run:\n" +
+              "  npm i browserslist-config-baseline@latest\n\n" +
+              "  # If using yarn, please run:\n" +
+              "  yarn upgrade --latest browserslist-config-baseline\n\n" +
+              "  # If using bun, please run:\n" +
+              "  bun update browserslist-config-baseline@latest\n\n" +
+              "Consider adding whichever command is appropriate to your\n" +
+              "build scripts to avoid seeing this message in future.\n",
           );
         }
       })
