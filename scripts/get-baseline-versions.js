@@ -1,8 +1,7 @@
-require = require("@httptoolkit/esm")(module)
+require = require("@httptoolkit/esm")(module);
 bbm = require("baseline-browser-mapping");
 
 let transform = function (bbm_versions) {
-
   var browsers = {
     chrome: "Chrome",
     chrome_android: "ChromeAndroid",
@@ -19,16 +18,16 @@ let transform = function (bbm_versions) {
     uc_android: "and_uc",
   };
 
-
   return bbm_versions
     .filter((version) => Object.keys(browsers).includes(version.browser))
     .map((version) => `${browsers[version.browser]} >= ${version.version}`);
-
-}
+};
 
 module.exports = function (config = {}) {
-  return transform(bbm.getCompatibleVersions({
-    targetYear: config.targetYear,
-    includeDownstreamBrowsers: config.includeDownstreamBrowsers
-  }))
-}
+  return transform(
+    bbm.getCompatibleVersions({
+      targetYear: config.targetYear,
+      includeDownstreamBrowsers: config.includeDownstreamBrowsers,
+    }),
+  );
+};
