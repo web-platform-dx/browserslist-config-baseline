@@ -1,9 +1,2 @@
-module.exports = [
-	"Chrome >= 108",
-	"ChromeAndroid >= 108",
-	"Edge >= 108",
-	"Firefox >= 108",
-	"FirefoxAndroid >= 108",
-	"Safari >= 16",
-	"iOS >= 16"
-]
+const getBaselineVersions = require("./scripts/get-baseline-versions");
+module.exports = getBaselineVersions({ targetYear: 2022 });
