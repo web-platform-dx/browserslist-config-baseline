@@ -2,7 +2,6 @@ module.exports = function () {
   const lastUpdated = "2025-03-28";
 
   const cv = require("compare-versions");
-  const lastUpdated = require("../lastUpdated.json").lastUpdated;
 
   let dateOneMonthAgo = new Date();
   dateOneMonthAgo.setMonth(new Date().getMonth() - 1);
@@ -12,8 +11,8 @@ module.exports = function () {
       .then((response) => response.json())
       .then((data) => {
         const packageJson = require("../package.json");
-        var localVersion = packageJson.version;
-        var remoteVersion = data["dist-tags"].latest;
+        const localVersion = packageJson.version;
+        const remoteVersion = data["dist-tags"].latest;
         if (cv.compare(localVersion, remoteVersion, "<")) {
           console.warn(
             `You are using browserlist-config-baseline version: \t${localVersion} \n` +
