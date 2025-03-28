@@ -1,4 +1,5 @@
 module.exports = function () {
+  const lastUpdated = "2025-03-28";
 
   const cv = require('compare-versions');
   const lastUpdated = require('../lastUpdated.json').lastUpdated;

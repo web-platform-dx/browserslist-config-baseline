@@ -20,8 +20,11 @@ npm i browserslist-config-baseline
 yarn add browserslist-config-baseline
 # bun
 bun add browserslist-config-baseline
+```
 
 ## Baseline Widely Available
+
+To target Baseline Widely Available, add the following to your `package.json`:
 
 <!-- prettier-ignore -->
 ```json
@@ -32,7 +35,7 @@ bun add browserslist-config-baseline
 }
 ```
 
-The minimum browser set for Baseline Widely Available changes frequently. Consider updating this module regularly by adding one of these commands to your build scripts:
+The data in this package changes frequently as new browser versions are released and new web-features become interoperable. Consider updating this module regularly by adding one of these commands to your build scripts:
 
 ```sh
 # npm
@@ -45,7 +48,7 @@ yarn upgrade --latest browserslist-config-baseline
 bun update browserslist-config-baseline@latest
 ```
 
-If you haven't updated `browserslist-config-basline` in the last month and your installed version is lower than the latest published version, you will receive a console warning every time `browserslist` references this module.
+If you haven't updated `browserslist-config-baseline` in the last month and you are targeting Widely Available, the package will check for updates whenever you run a `browserslist`-compatible tool and prompt you to upgrade if there is a new version available.
 
 ## Baseline year feature sets
 
@@ -80,7 +83,7 @@ The minimum browser versions that support these feature sets are usually the las
 
 ## Include Chromium downstream browsers
 
-To include browsers that implement Chromium where possible, insert `/with-downstream` into your statement between the root directory and the year:
+To include browsers that implement Chromium where possible, insert `/with-downstream` into your `extends` statement immediately after the package name:
 
 <!-- prettier-ignore -->
 ```json
