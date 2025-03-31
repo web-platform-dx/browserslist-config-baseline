@@ -1,6 +1,6 @@
 {
   "name": "browserslist-config-baseline",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A browserslist config based on Web Platform Baseline.",
   "license": "Apache-2.0",
   "author": {
@@ -16,7 +16,8 @@
     "url": "https://github.com/web-platform-dx/browserslist-config-baseline/issues"
   },
   "scripts": {
-    "test": "node test.mjs"
+    "test": "node test.mjs",
+    "prepare-release": "node scripts/update-last-updated.js; npm version patch"
   },
   "keywords": [
     "browserslist",
@@ -27,5 +28,10 @@
   "devDependencies": {
     "browserslist": "^4.23.1",
     "prettier": "^3.3.2"
+  },
+  "dependencies": {
+    "@httptoolkit/esm": "^3.3.1",
+    "baseline-browser-mapping": "^2.1.0",
+    "compare-versions": "^6.1.1"
   }
 }
