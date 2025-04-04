@@ -1,6 +1,10 @@
 require = require("@httptoolkit/esm")(module);
 bbm = require("baseline-browser-mapping");
 
+const packageJson = require(process.cwd() + "/package.json");
+const incomingConfig = packageJson["browserslist-config-baseline"] ?? {};
+let logConfigToConsole = incomingConfig.logConfigToConsole ?? false;
+
 let transform = function (bbm_versions) {
   var browsers = {
     chrome: "Chrome",
@@ -24,10 +28,14 @@ let transform = function (bbm_versions) {
 };
 
 module.exports = function (config = {}) {
-  return transform(
-    bbm.getCompatibleVersions({
-      targetYear: config.targetYear,
-      includeDownstreamBrowsers: config.includeDownstreamBrowsers,
-    }),
-  );
+  let listToReturn = transform(bbm.getCompatibleVersions(config));
+
+  if (logConfigToConsole) {
+    console.log(
+      "Your browserslit config from browserslist-config-baseline is:\n",
+      listToReturn,
+    );
+  }
+
+  return listToReturn;
 };
