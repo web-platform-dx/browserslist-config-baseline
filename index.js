@@ -1,5 +1,9 @@
+const options = require("./scripts/handle-config");
+
 const getBaselineVersions = require("./scripts/get-baseline-versions");
-module.exports = getBaselineVersions();
+const targetVersions = getBaselineVersions(options);
+
+module.exports = targetVersions;
 
 const compareVersions = require("./scripts/compare-versions-warning");
 compareVersions();
