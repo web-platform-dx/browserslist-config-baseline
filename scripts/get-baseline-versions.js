@@ -28,7 +28,10 @@ let transform = function (bbm_versions) {
 };
 
 module.exports = function (config = {}) {
-  let listToReturn = transform(bbm.getCompatibleVersions(config));
+  const versions = bbm.getCompatibleVersions(
+    Object.assign({}, incomingConfig, config)
+  );
+  const listToReturn = transform(versions);
 
   if (logConfigToConsole) {
     console.log(
