@@ -1,8 +1,22 @@
 require = require("@httptoolkit/esm")(module);
 bbm = require("baseline-browser-mapping");
 
-const packageJson = require(process.cwd() + "/package.json");
-const incomingConfig = packageJson["browserslist-config-baseline"] ?? {};
+const fs = require("fs");
+const path = require("path");
+
+function readConfig(loc, name) {
+  do {
+    try {
+      const pkg = require(path.join(loc, "package.json"));
+      if (pkg.hasOwnProperty(name)) return pkg[name];
+    } catch {}
+  } while (loc !== (loc = path.dirname(loc)));
+
+  return null;
+}
+
+const incomingConfig =
+  readConfig(process.cwd(), "browserslist-config-baseline") ?? {};
 let logConfigToConsole = incomingConfig.logConfigToConsole ?? false;
 
 let transform = function (bbm_versions) {
