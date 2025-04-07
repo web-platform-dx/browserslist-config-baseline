@@ -43,8 +43,6 @@ function reconcileConfigs(extendsConfig) {
   const pkgConfig =
     readConfig(process.cwd(), "browserslist-config-baseline") ?? {};
 
-  console.log(pkgConfig);
-
   // Check to see if there are two configured target years
   if (pkgConfig.targetYear && extendsConfig.targetYear) {
     bbmConfig.targetYear = Math.min(
