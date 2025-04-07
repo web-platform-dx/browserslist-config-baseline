@@ -63,12 +63,17 @@ function reconcileConfigs(extendsConfig) {
   // Check to see if widelyAvailableOnDate is being used alongside extends .../YYYY
   if (pkgConfig.widelyAvailableOnDate && extendsConfig.targetYear) {
     const widelyAvailableOnDate = new Date(pkgConfig.widelyAvailableOnDate);
-    const targetYear = new Date(extendsConfig.targetYear + "-12-31");
+    const targetYearDate = new Date(extendsConfig.targetYear + "-12-31");
 
-    let stringFragment =
-      widelyAvailableOnDate < targetYear
-        ? `Proceeding with the lower option, widelyAvailableOnDate: ${pkgConfig.widelyAvailableOnDate}.\n`
-        : `Proceeding with the lower option, targetYear: ${extendsConfig.targetYear}.\n`;
+    let stringFragment = "";
+
+    if (widelyAvailableOnDate < targetYearDate) {
+      bbmConfig.widelyAvailableOnDate = pkgConfig.widelyAvailableOnDate;
+      stringFragment += `Proceeding with the lower option, widelyAvailableOnDate: ${pkgConfig.widelyAvailableOnDate}.\n`;
+    } else {
+      bbmConfig.targetYear = extendsConfig.targetYear;
+      stringFragment += `Proceeding with the lower option, targetYear: ${extendsConfig.targetYear}.\n`;
+    }
 
     console.warn(
       `[browserslist-config-baseline] You’ve set widelyAvailableOnDate: ` +
@@ -80,11 +85,16 @@ function reconcileConfigs(extendsConfig) {
     );
   }
 
+  if (pkgConfig.widelyAvailableOnDate && !extendsConfig.targetYear) {
+    bbmConfig.widelyAvailableOnDate = pkgConfig.widelyAvailableOnDate;
+  }
+
   // Check to see if extends and package have conflicting includeDownstreamBrowsers
   if (
     extendsConfig.includeDownstreamBrowsers &&
     pkgConfig.includeDownstreamBrowsers === false
   ) {
+    bbmConfig.includeDownstreamBrowsers = false;
     console.warn(
       `[browserslist-config-baseline]` +
         `You've extended your browserslist config using \`/with-downstream\` ` +
@@ -93,7 +103,6 @@ function reconcileConfigs(extendsConfig) {
         `Remove includeDownstreamBrowsers: false in package.json or use` +
         `\`extend browserslist-config-baseline\` to suppress this warning.`,
     );
-    bbmConfig.includeDownstreamBrowsers = false;
   }
 
   return {
@@ -104,6 +113,7 @@ function reconcileConfigs(extendsConfig) {
 
 module.exports = function (extendsConfig = {}) {
   const config = reconcileConfigs(extendsConfig);
+
   const versions = bbm.getCompatibleVersions(config.bbmConfig);
   const listToReturn = transform(versions);
 
