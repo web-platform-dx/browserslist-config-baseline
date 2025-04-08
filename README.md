@@ -152,7 +152,7 @@ You can add a `browserslist-config-baseline` object to your `package.json` to se
 
 ### Target Baseline year feature sets
 
-To target a Baseline year, set the `targetYear` property to the desired year:
+To target a Baseline year, set the `baselineYear` property to the desired year:
 
 <!-- prettier-ignore -->
 ```json
@@ -161,13 +161,13 @@ To target a Baseline year, set the `targetYear` property to the desired year:
     "extends browserslist-config-baseline"
   ],
   "browserslist-config-baseline": {
-      "targetYear": 2020
+      "baselineYear": 2020
   }
 }
 ```
 
 > **NOTE**
-> You cannot use the `targetYear` and `widelyAvailableOnDate` options together. The `baseline-browser-mapping` module that supplies data to `browserslist-config-baseline` will throw an error.
+> You cannot use the `baselineYear` and `widelyAvailableOnDate` options together. The `baseline-browser-mapping` module that supplies data to `browserslist-config-baseline` will throw an error.
 
 ### Target Baseline Widely available on a particular date
 
@@ -186,7 +186,7 @@ To target Baseline Widely available on a particular date, set the `widelyAvailab
 ```
 
 > **NOTE**
-> You cannot use the `targetYear` and `widelyAvailableOnDate` options together. The `baseline-browser-mapping` module that supplies data to `browserslist-config-baseline` will throw an error.
+> You cannot use the `baselineYear` and `widelyAvailableOnDate` options together. The `baseline-browser-mapping` module that supplies data to `browserslist-config-baseline` will throw an error.
 
 ### Include downstream browsers
 

@@ -9,7 +9,7 @@ function readConfig(loc, name) {
     try {
       const pkg = require(path.join(loc, "package.json"));
       if (pkg.hasOwnProperty(name)) return pkg[name];
-    } catch {}
+    } catch { }
   } while (loc !== (loc = path.dirname(loc)));
 
   return null;
@@ -43,50 +43,66 @@ function reconcileConfigs(extendsConfig) {
   const pkgConfig =
     readConfig(process.cwd(), "browserslist-config-baseline") ?? {};
 
+  // Handle correct configurations
+  if (pkgConfig.widelyAvailableOnDate && !extendsConfig.baselineYear)
+    bbmConfig.widelyAvailableOnDate = pkgConfig.widelyAvailableOnDate;
+
+  if (pkgConfig.baselineYear && !extendsConfig.baselineYear)
+    bbmConfig.targetYear = pkgConfig.baselineYear;
+
+  if (extendsConfig.baselineYear && !pkgConfig.baselineYear)
+    bbmConfig.targetYear = extendsConfig.baselineYear;
+
+  if (
+    (extendsConfig.includeDownstreamBrowsers &&
+      !pkgConfig.includeDownstreamBrowsers) ||
+    (!extendsConfig.includeDownstreamBrowsers &&
+      pkgConfig.includeDownstreamBrowsers) ||
+    (extendsConfig.includeDownstreamBrowsers &&
+      pkgConfig.includeDownstreamBrowsers)
+  )
+    bbmConfig.includeDownstreamBrowsers = true;
+
   // Check to see if there are two configured target years
-  if (pkgConfig.targetYear && extendsConfig.targetYear) {
+  if (pkgConfig.baselineYear && extendsConfig.baselineYear) {
     bbmConfig.targetYear = Math.min(
-      pkgConfig.targetYear,
-      extendsConfig.targetYear,
+      pkgConfig.baselineYear,
+      extendsConfig.baselineYear,
     );
 
     console.warn(
-      `[browserslist-config-baseline] You’ve set targetYear: ` +
-        `${pkgConfig.targetYear} in your package.json, but extended this ` +
-        `config as \`browserslist-config-baseline/${extendsConfig.targetYear}\`. ` +
-        `Proceeding with the lower option, targetYear: ${bbmConfig.targetYear}. ` +
-        `Remove targetYear in package.json or use \`extend browserslist-config-baseline\` ` +
-        `to suppress this warning.`,
+      `[browserslist-config-baseline] You’ve set baselineYear: ` +
+      `${pkgConfig.baselineYear} in your package.json, but extended this ` +
+      `config as \`browserslist-config-baseline/${extendsConfig.baselineYear}\`.\n` +
+      `Proceeding with the lower option, baselineYear: ${bbmConfig.targetYear}.\n` +
+      `Remove baselineYear in package.json or use \`extend browserslist-config-baseline\` ` +
+      `to suppress this warning.`,
     );
   }
 
   // Check to see if widelyAvailableOnDate is being used alongside extends .../YYYY
-  if (pkgConfig.widelyAvailableOnDate && extendsConfig.targetYear) {
+  if (pkgConfig.widelyAvailableOnDate && extendsConfig.baselineYear) {
     const widelyAvailableOnDate = new Date(pkgConfig.widelyAvailableOnDate);
-    const targetYearDate = new Date(extendsConfig.targetYear + "-12-31");
+    const baselineYearDate = new Date(extendsConfig.baselineYear + "-12-31");
 
     let stringFragment = "";
 
-    if (widelyAvailableOnDate < targetYearDate) {
+    if (widelyAvailableOnDate < baselineYearDate) {
       bbmConfig.widelyAvailableOnDate = pkgConfig.widelyAvailableOnDate;
       stringFragment += `Proceeding with the lower option, widelyAvailableOnDate: ${pkgConfig.widelyAvailableOnDate}.\n`;
     } else {
-      bbmConfig.targetYear = extendsConfig.targetYear;
-      stringFragment += `Proceeding with the lower option, targetYear: ${extendsConfig.targetYear}.\n`;
+      bbmConfig.targetYear = extendsConfig.baselineYear;
+      stringFragment += `Proceeding with the lower option, baselineYear: ${extendsConfig.baselineYear}.\n`;
     }
 
     console.warn(
       `[browserslist-config-baseline] You’ve set widelyAvailableOnDate: ` +
-        `"${pkgConfig.widelyAvailableOnDate}" in your package.json, but extended this ` +
-        `config as \`browserslist-config-baseline/${extendsConfig.targetYear}\`.\n` +
-        stringFragment +
-        `Remove widelyAvailableOnDate in package.json or use \`extend browserslist-config-baseline\` ` +
-        `to suppress this warning.`,
+      `"${pkgConfig.widelyAvailableOnDate}" in your package.json, but extended this ` +
+      `config as \`browserslist-config-baseline/${extendsConfig.baselineYear}\`.\n` +
+      stringFragment +
+      `Remove widelyAvailableOnDate in package.json or use \`extend browserslist-config-baseline\` ` +
+      `to suppress this warning.`,
     );
-  }
-
-  if (pkgConfig.widelyAvailableOnDate && !extendsConfig.targetYear) {
-    bbmConfig.widelyAvailableOnDate = pkgConfig.widelyAvailableOnDate;
   }
 
   // Check to see if extends and package have conflicting includeDownstreamBrowsers
@@ -97,11 +113,11 @@ function reconcileConfigs(extendsConfig) {
     bbmConfig.includeDownstreamBrowsers = false;
     console.warn(
       `[browserslist-config-baseline]` +
-        `You've extended your browserslist config using \`/with-downstream\` ` +
-        `but set includeDownstreamBrowsers: false in package.json.\n` +
-        `Proceeding with includeDownstreamBrowsers: false.\n` +
-        `Remove includeDownstreamBrowsers: false in package.json or use` +
-        `\`extend browserslist-config-baseline\` to suppress this warning.`,
+      `You've extended your browserslist config using \`/with-downstream\` ` +
+      `but set includeDownstreamBrowsers: false in package.json.\n` +
+      `Proceeding with includeDownstreamBrowsers: false.\n` +
+      `Remove includeDownstreamBrowsers: false in package.json or use` +
+      `\`extend browserslist-config-baseline\` to suppress this warning.`,
     );
   }
 
@@ -119,7 +135,7 @@ module.exports = function (extendsConfig = {}) {
 
   if (config.logConfigToConsole) {
     console.log(
-      "Your browserslit config from browserslist-config-baseline is:\n",
+      "Your browserslist config from browserslist-config-baseline is:\n",
       listToReturn,
     );
   }

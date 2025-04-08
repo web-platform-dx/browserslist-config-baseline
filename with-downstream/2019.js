@@ -1,5 +1,5 @@
 const getBaselineVersions = require("../scripts/get-baseline-versions");
 module.exports = getBaselineVersions({
-  targetYear: 2019,
+  baselineYear: 2019,
   includeDownstreamBrowsers: true,
 });
