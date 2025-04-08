@@ -204,6 +204,20 @@ To include browsers the implement Chromium, set the `includeDownstreamBrowsers` 
 }
 ```
 
+## Logging your config to the console
+
+To see the array of minimum browser versions that you are passing to `browserslist`, add `logConfigToConsole: true` to your `package.json` config:
+
+```json
+{
+  "browserslist-config-baseline": {
+    "logConfigToConsole": true
+  }
+}
+```
+
+This works with both methods of setting your target browsers.
+
 ## See also
 
 - [WebDX Baseline specification](https://github.com/web-platform-dx/web-features/blob/main/docs/baseline.md)
