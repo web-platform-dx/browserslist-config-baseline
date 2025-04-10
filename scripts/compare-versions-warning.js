@@ -1,5 +1,5 @@
 module.exports = function () {
-  const lastUpdated = "2025-03-28";
+  const lastUpdated = "2025-04-10";
 
   const cv = require("compare-versions");
 
