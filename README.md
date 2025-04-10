@@ -35,6 +35,22 @@ To target Baseline Widely Available, add the following to your `package.json`:
 }
 ```
 
+If you want to see your list of chosen browsers every time `browserslist` calls `browserslist-baseline-config`, add a `browserslist-config-baseline` object to your `package.json` with `logConfigToConsole` set to `true`:
+
+<!-- prettier-ignore -->
+```json
+{
+  "browserslist": [
+    "extends browserslist-config-baseline"
+  ],
+  "browserslist-config-baseline": {
+    "logConfigToConsole": true
+  }
+}
+```
+
+The `logConfigToConsole` option works with both of the target configuration options mentioned below.
+
 The data in this package changes frequently as new browser versions are released and new web-features become interoperable. Consider updating this module regularly by adding one of these commands to your build scripts:
 
 ```sh
@@ -50,7 +66,16 @@ bun update browserslist-config-baseline@latest
 
 If you haven't updated `browserslist-config-baseline` in the last month and you are targeting Widely Available, the package will check for updates whenever you run a `browserslist`-compatible tool and prompt you to upgrade if there is a new version available.
 
-## Baseline year feature sets
+## Configuring `browserslist-config-baseline`
+
+There are two ways to configure `browserslist-config-basesline`:
+
+- [Add options to the end of your `extends` statement](#configuring-targets-using-the-extends-statement).
+- Using a `browserslist-config-baseline` configuration object in your `package.json`.
+
+## Configuring targets using the `extends` statement
+
+### Baseline year feature sets
 
 Baseline year feature sets include all the web platform features that were fully supported in the core browser set at the end of a given calendar year. To use a Baseline year feature set, add the year in the format `/YYYY` to the end of your `extends` statement:
 
@@ -81,7 +106,7 @@ This equates to the following `browserslist` config:
 
 The minimum browser versions that support these feature sets are usually the last version released in that year or a few versions earlier. The feature set > browser version mappings in this module were determined using [`baseline-browser-mapping`](https://npmjs.org/baseline-browser-mapping).
 
-## Include Chromium downstream browsers
+### Include Chromium downstream browsers
 
 To include browsers that implement Chromium where possible, insert `/with-downstream` into your `extends` statement immediately after the package name:
 
@@ -117,6 +142,81 @@ This equates to the following `browserslist` config:
 ```
 
 The minimum browser versions of non-core browsers are provided by `baseline-browser-mapping` based on two sources: [`@mdn/browser-compat-data`](https://npmjs.org/@mdn/browsers-compat-data) where those engine version mappings exist, and parsed user agents from [`useragents.io`](https://useragents.io) where necessary. For more information on these mappings, please see [`baseline-browser-mapping`'s README](https://www.npmjs.com/package/baseline-browser-mapping#downstream-browsers).
+
+## Configuring targets using a `browserslist-config-baseline` object in `package.json`
+
+You can add a `browserslist-config-baseline` object to your `package.json` to set your Baseline target.
+
+> **NOTE**
+> The `browserslist-config-baseline` config in `package.json` only works if you use the basic `extends` statement. If you add a `YYYY` year and/or `with-downstream` to your `extends` statement, that will take precedence over the target settings in your `browserslist-config-baseline` object. The `logConfigToConsole` option works with both config methods.
+
+### Target Baseline year feature sets
+
+To target a Baseline year, set the `baselineYear` property to the desired year:
+
+<!-- prettier-ignore -->
+```json
+{
+  "browserslist": [
+    "extends browserslist-config-baseline"
+  ],
+  "browserslist-config-baseline": {
+      "baselineYear": 2020
+  }
+}
+```
+
+> **NOTE**
+> You cannot use the `baselineYear` and `widelyAvailableOnDate` options together. The `baseline-browser-mapping` module that supplies data to `browserslist-config-baseline` will throw an error.
+
+### Target Baseline Widely available on a particular date
+
+To target Baseline Widely available on a particular date, set the `widelyAvailableOnDate` property to the desired date in the format `YYYY-MM-DD`:
+
+<!-- prettier-ignore -->
+```json
+{
+  "browserslist": [
+    "extends browserslist-config-baseline"
+  ],
+  "browserslist-config-baseline": {
+      "widelyAvailableOnDate": "2020-06-01"
+  }
+}
+```
+
+> **NOTE**
+> You cannot use the `baselineYear` and `widelyAvailableOnDate` options together. The `baseline-browser-mapping` module that supplies data to `browserslist-config-baseline` will throw an error.
+
+### Include downstream browsers
+
+To include browsers the implement Chromium, set the `includeDownstreamBrowsers` property to `true`:
+
+<!-- prettier-ignore -->
+```json
+{
+  "browserslist": [
+    "extends browserslist-config-baseline"
+  ],
+  "browserslist-config-baseline": {
+      "includeDownstreamBrowsers": true
+  }
+}
+```
+
+## Logging your config to the console
+
+To see the array of minimum browser versions that you are passing to `browserslist`, add `logConfigToConsole: true` to your `package.json` config:
+
+```json
+{
+  "browserslist-config-baseline": {
+    "logConfigToConsole": true
+  }
+}
+```
+
+This works with both methods of setting your target browsers.
 
 ## See also
 
