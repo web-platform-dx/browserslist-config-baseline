@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "node test.mjs",
-    "prepare-release": "node scripts/update-last-updated.js; npm version patch"
+    "prepare-release": "npm version patch"
   },
   "keywords": [
     "browserslist",
