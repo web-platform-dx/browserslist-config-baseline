@@ -1,5 +1,4 @@
-require = require("@httptoolkit/esm")(module);
-bbm = require("baseline-browser-mapping");
+const { getCompatibleVersions } = require("baseline-browser-mapping");
 
 const fs = require("fs");
 const path = require("path");
@@ -130,7 +129,7 @@ function reconcileConfigs(extendsConfig) {
 module.exports = function (extendsConfig = {}) {
   const config = reconcileConfigs(extendsConfig);
 
-  const versions = bbm.getCompatibleVersions(config.bbmConfig);
+  const versions = getCompatibleVersions(config.bbmConfig);
   const listToReturn = transform(versions);
 
   if (config.logConfigToConsole) {
